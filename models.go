@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"time"
 
+	"github.com/google/uuid"
 	"gorm.io/gorm"
 )
 
@@ -56,5 +57,17 @@ type Company struct {
 
 type Language struct {
 	Code string `gorm:"primarykey"`
+	Name string
+}
+
+func NewFoo(name string) *Foo {
+	return &Foo{
+		ID:   uuid.NewString(),
+		Name: name,
+	}
+}
+
+type Foo struct {
+	ID   string `gorm:"primarykey;type:uuid;default:gen_random_uuid()"`
 	Name string
 }
